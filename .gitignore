@@ -1,6 +1,6 @@
 node_modules/
 dist/
 .DS_Store
-deliverables/
+/deliverables/
 补镜_CC交接说明.md
 docs/补镜-产品说明-内部稿.pdf
