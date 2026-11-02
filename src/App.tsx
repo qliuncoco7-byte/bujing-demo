@@ -42,20 +42,9 @@ export default function App() {
   const [licenseCandidate, setLicenseCandidate] = useState<Candidate | null>(null)
   const [toast, setToast] = useState<ToastData | null>(null)
   const [sessionKey, setSessionKey] = useState(0)
-  const [entryHintVisible, setEntryHintVisible] = useState(() => {
-    try {
-      return window.localStorage.getItem('bujing-entry-hint-seen') !== '1'
-    } catch {
-      return true
-    }
-  })
+  const [entryHintVisible, setEntryHintVisible] = useState(true)
   const dismissEntryHint = useCallback(() => {
     setEntryHintVisible(false)
-    try {
-      window.localStorage.setItem('bujing-entry-hint-seen', '1')
-    } catch {
-      // localStorage may be unavailable; dismissing in memory is enough.
-    }
   }, [])
 
   useEffect(() => {

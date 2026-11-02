@@ -18,13 +18,6 @@ const context = await browser.newContext({
 })
 const page = await context.newPage()
 page.setDefaultTimeout(20000)
-await page.addInitScript(() => {
-  try {
-    localStorage.setItem('bujing-entry-hint-seen', '1')
-  } catch {
-    // ignore
-  }
-})
 const wait = (ms) => page.waitForTimeout(ms)
 const script = []
 let t0 = 0
@@ -162,6 +155,7 @@ async function scrollPanel(to = 'bottom') {
 try {
   await page.goto('http://localhost:4173/', { waitUntil: 'networkidle' })
   await wait(700)
+  await page.evaluate(() => document.querySelector('.entry-hint-close')?.click())
   await injectOverlay()
   await wait(250)
   t0 = Date.now()

@@ -15,13 +15,6 @@ const page = await browser.newPage({
   viewport: { width: 1440, height: 900 },
   deviceScaleFactor: 1,
 })
-await page.addInitScript(() => {
-  try {
-    localStorage.setItem('bujing-entry-hint-seen', '1')
-  } catch {
-    // ignore
-  }
-})
 const wait = (ms) => page.waitForTimeout(ms)
 const shot = async (name) => {
   await page.screenshot({ path: path.join(out, `${name}.png`) })
