@@ -7,7 +7,7 @@
 - **产品说明 PDF**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf（5 页，内部稿；第 4 页待本人补充）
 - **源码仓库**：https://github.com/qliuncoco7-byte/bujing-demo
 - **说明源文件**：`docs/产品说明.html`
-- **AI 使用记录**：`docs/AI使用记录.md`
+- **AI 使用记录**：`docs/ai-usage-record.md`
 
 ## 本地运行
 
@@ -86,4 +86,4 @@ node scripts/visual_check.mjs       # 全流程截图
 ## 仍需本人补充
 
 - **产品说明第 4 页「本人喜欢的产品」**：`docs/产品说明.html` 中保留了内部待补区块。必须由本人提供真实经历后替换，并删除该页内部待补标记，再重新导出 PDF。
-- 如果使用 DeepSeek 或其他工具，请在 `docs/AI使用记录.md` 的相应位置按实际补充；本记录不虚构未发生的工作。
+- 如果使用 DeepSeek 或其他工具，请在 `docs/ai-usage-record.md` 的相应位置按实际补充；本记录不虚构未发生的工作。
