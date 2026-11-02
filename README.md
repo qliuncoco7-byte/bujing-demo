@@ -5,6 +5,7 @@
 - **Demo**：https://qliuncoco7-byte.github.io/bujing-demo/
 - **操作录屏**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4（约 2 分 07 秒，含系统 TTS 旁白；本地同文件 `public/deliverables/bujing-demo.mp4`）
 - **产品说明 PDF**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf（5 页，内部稿；第 4 页待本人补充）
+- **重新导出 PDF**：编辑 `docs/产品说明.html` 后运行 `node scripts/export_notes.mjs docs/产品说明.html public/deliverables/bujing-product-notes.pdf`
 - **源码仓库**：https://github.com/qliuncoco7-byte/bujing-demo
 - **说明源文件**：`docs/产品说明.html`
 - **AI 使用记录**：`docs/ai-usage-record.md`
