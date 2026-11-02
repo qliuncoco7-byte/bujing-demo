@@ -15,6 +15,13 @@ const page = await browser.newPage({
   viewport: { width: 1440, height: 900 },
   deviceScaleFactor: 1,
 })
+await page.addInitScript(() => {
+  try {
+    localStorage.setItem('bujing-entry-hint-seen', '1')
+  } catch {
+    // ignore
+  }
+})
 const wait = (ms) => page.waitForTimeout(ms)
 const shot = async (name) => {
   await page.screenshot({ path: path.join(out, `${name}.png`) })
@@ -29,7 +36,7 @@ await page.locator('.timeline-gap').click()
 await wait(350)
 await shot('gap')
 
-await page.locator('.gap-actions .btn-primary').click()
+await page.locator('.timeline-context .btn-primary').click()
 await wait(400)
 await page.getByRole('button', { name: /填入示例/ }).click()
 await page.getByRole('switch', { name: '参考原片匹配' }).click()

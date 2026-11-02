@@ -18,6 +18,13 @@ const context = await browser.newContext({
 })
 const page = await context.newPage()
 page.setDefaultTimeout(20000)
+await page.addInitScript(() => {
+  try {
+    localStorage.setItem('bujing-entry-hint-seen', '1')
+  } catch {
+    // ignore
+  }
+})
 const wait = (ms) => page.waitForTimeout(ms)
 const script = []
 let t0 = 0

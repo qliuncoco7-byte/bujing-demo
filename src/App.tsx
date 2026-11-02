@@ -42,6 +42,32 @@ export default function App() {
   const [licenseCandidate, setLicenseCandidate] = useState<Candidate | null>(null)
   const [toast, setToast] = useState<ToastData | null>(null)
   const [sessionKey, setSessionKey] = useState(0)
+  const [entryHintVisible, setEntryHintVisible] = useState(() => {
+    try {
+      return window.localStorage.getItem('bujing-entry-hint-seen') !== '1'
+    } catch {
+      return true
+    }
+  })
+  const dismissEntryHint = useCallback(() => {
+    setEntryHintVisible(false)
+    try {
+      window.localStorage.setItem('bujing-entry-hint-seen', '1')
+    } catch {
+      // localStorage may be unavailable; dismissing in memory is enough.
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!entryHintVisible) return
+    const hide = () => dismissEntryHint()
+    window.addEventListener('pointerdown', hide, { once: true })
+    window.addEventListener('keydown', hide, { once: true })
+    return () => {
+      window.removeEventListener('pointerdown', hide)
+      window.removeEventListener('keydown', hide)
+    }
+  }, [entryHintVisible, dismissEntryHint])
 
   const activeTime = mode.kind === 'timeline' ? timelineTime : previewTime
   const previewCandidateId =
@@ -388,27 +414,45 @@ export default function App() {
             intent={panelIntent}
             onTogglePlay={togglePlay}
             onToggleMute={() => setMuted((value) => !value)}
-            onOpenPanel={openShot}
             onExitPreview={exitPreview}
             onEnterContext={previewContext}
             onInsert={insertCandidate}
             onRewind={rewind}
           />
-          <Timeline
-            displayTime={timelineTime}
-            previewing={mode.kind !== 'timeline'}
-            inserted={timeline.inserted}
-            selection={selection}
-            canUndo={timeline.history.length > 0}
-            onSeek={seekTimeline}
-            onSelectGap={selectGap}
-            onSelectInserted={selectInserted}
-            onClearSelection={clearSelection}
-            panelOpen={panelOpen}
-            onOpenPanel={openShot}
-            onUndo={undoInsert}
-            onReplace={() => openPanel('replace')}
-          />
+          <div className="timeline-dock">
+            <Timeline
+              displayTime={timelineTime}
+              previewing={mode.kind !== 'timeline'}
+              inserted={timeline.inserted}
+              selection={selection}
+              canUndo={timeline.history.length > 0}
+              panelOpen={panelOpen}
+              onSeek={seekTimeline}
+              onSelectGap={selectGap}
+              onSelectInserted={selectInserted}
+              onClearSelection={clearSelection}
+              onOpenPanel={openShot}
+              onUndo={undoInsert}
+              onReplace={() => openPanel('replace')}
+            />
+            {entryHintVisible && !panelOpen && selection === 'none' && (
+              <div className="entry-hint" role="status">
+                <span>需要补充画面时，可以从这里开始。</span>
+                <button
+                  type="button"
+                  className="entry-hint-close"
+                  aria-label="关闭提示"
+                  onClick={(event) => {
+                    event.stopPropagation()
+                    dismissEntryHint()
+                  }}
+                >
+                  <Icon name="close" size={13} />
+                </button>
+                <span className="entry-hint-arrow" aria-hidden="true" />
+              </div>
+            )}
+          </div>
         </main>
 
         <SidePanel
@@ -472,7 +516,7 @@ export default function App() {
           </span>
           <div>
             <strong>补镜</strong>
-            <p>在剪辑时间线中，为缺辅助画面的区间找一段更贴合原片表达的镜头。</p>
+            <p>在剪辑时间线中，为缺辅助画面的区间找一段更贴合原片表达的镜头。本次示例是漫画风城市科普；功能面向需要补辅助画面的各类剪辑创作者。</p>
           </div>
         </div>
         <div className="about-grid">

@@ -7,6 +7,7 @@
 - **产品说明 PDF**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf（5 页，已补齐个人经历）
 - **重新导出 PDF**：编辑 `docs/产品说明.html` 后运行 `node scripts/export_notes.mjs docs/产品说明.html public/deliverables/bujing-product-notes.pdf`
 - **源码仓库**：https://github.com/qliuncoco7-byte/bujing-demo
+- **网页版说明（连续长文 + 锚点目录）**：https://qliuncoco7-byte.github.io/bujing-demo/notes/
 - **说明源文件**：`docs/产品说明.html`
 - **AI 使用记录**：`docs/ai-usage-record.md`
 
@@ -15,11 +16,16 @@
 ```bash
 npm install
 npm run dev        # http://localhost:5173
-npm run build      # 生产构建到 dist/
+npm run build      # 生产构建到 dist/（含 /notes/ 网页版说明）
 npm run preview    # 预览生产构建
 ```
 
 构建使用相对路径（`base: './'`），可部署在域名根路径或子路径。没有后台、账户、数据库或 API Key。
+
+## 目标用户与本次示例
+
+- **目标用户**：在剪辑过程中需要补充自身素材的创作者，包括影视混剪、科普讲解等视频类型。共同需求是当前内容缺少合适的辅助画面，需要找到或生成能接入原片的镜头。
+- **本次示例**：漫画风城市科普只是 Demo 的演示案例，不代表产品只面向科普创作者。
 
 ## 演示路径
 

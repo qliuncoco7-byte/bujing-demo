@@ -118,7 +118,6 @@ type PreviewPlayerProps = {
   muted: boolean
   onTogglePlay: () => void
   onToggleMute: () => void
-  onOpenPanel: () => void
   onExitPreview: () => void
   onEnterContext: (candidate: Candidate) => void
   onInsert: (candidate: Candidate) => void
@@ -225,7 +224,6 @@ export function PreviewPlayer({
   muted,
   onTogglePlay,
   onToggleMute,
-  onOpenPanel,
   onExitPreview,
   onEnterContext,
   onInsert,
@@ -235,8 +233,6 @@ export function PreviewPlayer({
   const resolved = resolveScene(mode, time, inserted)
   const program = phaseProgress(mode, time)
   const ended = time >= program.total - 0.01
-  const showGapCard =
-    mode.kind === 'timeline' && resolved.isGap && !inserted && !panelOpen
   const showGapHint =
     mode.kind === 'timeline' && resolved.isGap && !inserted && panelOpen
   const showStartOverlay =
@@ -291,36 +287,6 @@ export function PreviewPlayer({
               <div className="start-copy">
                 <strong>{PROJECT.title}</strong>
                 <span>城市绿化科普 · 15 秒示例项目</span>
-              </div>
-            </div>
-          )}
-
-          {showGapCard && (
-            <div className="gap-overlay">
-              <div className="gap-card">
-                <div className="gap-kicker">
-                  <span className="pulse-dot" />
-                  空档 · 00:05–00:09
-                </div>
-                <h2>为这段空档补充画面</h2>
-                <p>
-                  口播正说到城市绿化。可以从素材库找，也可以按需生成，再看前后镜头的效果。
-                </p>
-                <div className="gap-actions">
-                  <button type="button" className="btn btn-primary" onClick={onOpenPanel}>
-                    <Icon name="plus" size={16} />
-                    补镜
-                  </button>
-                  <button type="button" className="btn btn-glass" onClick={onTogglePlay}>
-                    <Icon name="play" size={15} />
-                    {playing ? '暂停' : '播放口播'}
-                  </button>
-                </div>
-                <div className="gap-meta">
-                  <span>4.0 秒</span>
-                  <span>16:9</span>
-                  <span>口播继续</span>
-                </div>
               </div>
             </div>
           )}

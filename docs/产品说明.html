@@ -874,6 +874,11 @@
           border-bottom-color: var(--amber);
         }
 
+        .web-toc a.web-toc-back {
+          margin-left: auto;
+          color: var(--amber);
+        }
+
         .page {
           width: 100%;
           max-width: 920px;
@@ -979,6 +984,7 @@
       <a href="#p3">判断与取舍</a>
       <a href="#p4">本人喜欢的产品</a>
       <a href="#p5">AI 与交付</a>
+      <a class="web-toc-back" href="../">← 返回 Demo</a>
     </nav>
 
     <!-- PAGE 1 -->
@@ -1010,17 +1016,21 @@
       <div class="two-col" style="margin-top: 8mm">
         <div>
           <span class="block-label">产品与用户</span>
-          <h3>会基础剪辑的科普视频创作者</h3>
+          <h3>需要补充辅助画面的剪辑创作者</h3>
           <p class="small-copy">
-            用口播或脚本制作城市科普视频。已有明确的剪辑任务和表达意图，但缺少一段辅助画面。
+            包括影视混剪、科普讲解等视频类型。已有创作意图和剪辑任务，但当前内容缺少合适的辅助画面。
           </p>
           <p class="small-copy" style="margin-top: 2.5mm">
-            <strong style="color: var(--ink-2)">场景：</strong>
-            漫画风城市科普，口播已完成；讲到城市绿化时，需要补一段 4 秒“风吹树冠”的画面。
+            <strong style="color: var(--ink-2)">共同需求：</strong>
+            找到或生成能接入原片的镜头。
+          </p>
+          <p class="small-copy" style="margin-top: 2.5mm">
+            <strong style="color: var(--ink-2)">本次示例：</strong>
+            漫画风城市科普，口播已完成；5–9 秒为空档。仅作演示案例，不代表产品只面向科普。
           </p>
         </div>
         <div>
-          <span class="block-label green">本次假设</span>
+          <span class="block-label green">产品假设</span>
           <h3>找到同一对象，仍不一定能直接用</h3>
           <p class="small-copy">
             检索可能返回实拍、强风或不同画风。对象相符，但表现形式、情绪、运动或时长不合适，用户仍要反复筛选、生成、回时间线试用。
@@ -1034,7 +1044,7 @@
       <figure class="figure hero-figure">
         <img src="assets/overview.png" alt="补镜演示项目的初始界面" />
         <figcaption class="caption">
-          <span><strong>预设项目「城市里的树」</strong> · 15 秒 · 16:9 · 口播完整</span>
+          <span><strong>演示案例「城市里的树」</strong> · 15 秒 · 16:9 · 口播完整</span>
           <span>5–9 秒为 4.0 秒空档</span>
         </figcaption>
       </figure>
@@ -1372,6 +1382,7 @@
             <li>提出并确定补镜功能方向，以及素材库与 AI 生成两条路径。</li>
             <li>对视频类型、表现风格与氛围适配提出要求；确定轻量授权、跳过后可再次开启。</li>
             <li>明确视频、PRD 等交付要求与细节；查看 Demo 和文档后继续提出调整、修改 PRD。</li>
+            <li>修正目标用户范围与入口引导：补镜由用户主动调用，漫画科普仅是演示案例。</li>
             <li>提供第 4 页真实经历，并确认演示范围的边界。</li>
           </ul>
         </div>
@@ -1400,6 +1411,10 @@
         <div class="link-row">
           <span>说明 PDF</span>
           <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf">https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf</a> · 可编辑源文件：docs/产品说明.html</strong>
+        </div>
+        <div class="link-row">
+          <span>网页版说明</span>
+          <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/notes/">https://qliuncoco7-byte.github.io/bujing-demo/notes/</a> · 连续长文 + 锚点目录</strong>
         </div>
       </div>
 
