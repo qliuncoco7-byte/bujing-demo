@@ -2,6 +2,7 @@
 
 日期：2026-11-02  
 项目：AI 与内容创作产品笔试 · 补镜（剪辑器内的辅助画面检索与生成交互 Demo）  
+交付：Demo https://qliuncoco7-byte.github.io/bujing-demo/ · 源码 https://github.com/qliuncoco7-byte/bujing-demo · 录屏 https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4 · 说明 PDF https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf  
 说明：本记录按实际使用填写。产品内不调用在线模型或素材 API；下表的 AI 使用均发生在产品梳理、工程实现、演示资源与文档制作环节。
 
 ## 1. 工具与参与范围
@@ -62,13 +63,17 @@
   - 替换后用 toast 撤销恢复上一版；
   - 重置、失败、重试。
 - 使用 Playwright 截图进行视觉检查，覆盖 1440×900、1280×800、1024×768 与 1920×1080。
+- 当前执行机器的系统输出处于静音状态（`osascript` 显示 `output muted: true`），媒体时钟在本地与线上浏览器中均未推进。因此**未完成听感确认**；已确认音频文件可加载、时长为 15.07 秒，并由播放/插入交互触发。需在真实有声环境复核口播。
 - 使用 Playwright 录屏（1280×800，约 2 分 07 秒），叠加操作光标与步骤字幕，再用自制 TTS 旁白与 ffmpeg 合成为 MP4；录屏基于真实运行的生产构建，不是静态拼接。
 - 使用无头 Chrome 将五页说明 HTML 导出为 PDF，并校验页数为 5。
 
 ### 文档与交付
 
 - 编写 README、五页产品说明源文件与 PDF、AI 使用记录、视频脚本/旁白。
-- 部署到 GitHub Pages（在用户授权下）并验证线上 Demo。
+- 在用户授权下创建公开仓库并部署到 GitHub Pages（2026-11-02）；对线上 Demo 重新执行功能断言，全部通过。
+  - Demo：https://qliuncoco7-byte.github.io/bujing-demo/
+  - 源码：https://github.com/qliuncoco7-byte/bujing-demo
+  - 录屏与 PDF 由同一站点托管。
 - 保留第 4 页内部待补标记，不虚构“本人喜欢的产品”。
 
 ## 5. 未使用 AI 或不由 AI 决定的部分

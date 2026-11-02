@@ -2,9 +2,10 @@
 
 一个纯前端交互 Demo：在简化剪辑工作区里，为 4 秒待补画面输入需求，可选参考前后镜头，比较素材库候选或生成候选，先做上下文预览，再插入、替换或撤销。
 
-- **Demo（部署后）**：https://qliuncoco7-byte.github.io/bujing-demo/
-- **操作录屏**：`public/deliverables/bujing-demo.mp4`（约 2 分 07 秒，含系统 TTS 旁白）
-- **产品说明 PDF**：`public/deliverables/bujing-product-notes.pdf`（5 页，内部稿；第 4 页待本人补充）
+- **Demo**：https://qliuncoco7-byte.github.io/bujing-demo/
+- **操作录屏**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4（约 2 分 07 秒，含系统 TTS 旁白；本地同文件 `public/deliverables/bujing-demo.mp4`）
+- **产品说明 PDF**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf（5 页，内部稿；第 4 页待本人补充）
+- **源码仓库**：https://github.com/qliuncoco7-byte/bujing-demo
 - **说明源文件**：`docs/产品说明.html`
 - **AI 使用记录**：`docs/AI使用记录.md`
 
@@ -78,7 +79,9 @@ node scripts/functional_check.mjs   # 核心流程自动化断言，含音频与
 node scripts/visual_check.mjs       # 全流程截图
 ```
 
-已核验：无登录打开、跳过解析后继续、两条路径切换不丢需求、上下文预览、插入/撤销/替换、失败保留条件并重试、重置示例；口播音频能播放并与时间线对齐。验证在 Chrome（Playwright）中完成，未做用户访谈或效果测量。
+已核验：无登录打开、跳过解析后继续、两条路径切换不丢需求、上下文预览、插入/撤销/替换、失败保留条件并重试、重置示例；时间线播放推进，口播文件成功加载并在播放/插入时触发。
+
+当前机器的系统输出处于静音状态（`output muted: true`），因此未在此环境完成听感确认；口播轨道在时间线上连续，音频时长为 15.07 秒，建议在有声环境复核音频。验证在 Chrome（Playwright）中完成，未做用户访谈或效果测量。
 
 ## 仍需本人补充
 
