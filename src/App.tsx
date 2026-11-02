@@ -42,13 +42,33 @@ export default function App() {
   const [licenseCandidate, setLicenseCandidate] = useState<Candidate | null>(null)
   const [toast, setToast] = useState<ToastData | null>(null)
   const [sessionKey, setSessionKey] = useState(0)
-  const [entryHintVisible, setEntryHintVisible] = useState(true)
+  const [entryHintPhase, setEntryHintPhase] = useState<'idle' | 'visible' | 'done'>('idle')
+  const atEmptyGapPaused =
+    mode.kind === 'timeline' &&
+    !playing &&
+    !panelOpen &&
+    !timeline.inserted &&
+    timelineTime >= PROJECT.gapStart &&
+    timelineTime < PROJECT.gapEnd
+
   const dismissEntryHint = useCallback(() => {
-    setEntryHintVisible(false)
+    setEntryHintPhase('done')
   }, [])
 
   useEffect(() => {
-    if (!entryHintVisible) return
+    if (panelOpen) setEntryHintPhase('done')
+  }, [panelOpen])
+
+  useEffect(() => {
+    setEntryHintPhase((phase) => {
+      if (phase === 'idle' && atEmptyGapPaused) return 'visible'
+      if (phase === 'visible' && !atEmptyGapPaused) return 'done'
+      return phase
+    })
+  }, [atEmptyGapPaused])
+
+  useEffect(() => {
+    if (entryHintPhase !== 'visible') return
     const hide = () => dismissEntryHint()
     window.addEventListener('pointerdown', hide, { once: true })
     window.addEventListener('keydown', hide, { once: true })
@@ -56,7 +76,7 @@ export default function App() {
       window.removeEventListener('pointerdown', hide)
       window.removeEventListener('keydown', hide)
     }
-  }, [entryHintVisible, dismissEntryHint])
+  }, [entryHintPhase, dismissEntryHint])
 
   const activeTime = mode.kind === 'timeline' ? timelineTime : previewTime
   const previewCandidateId =
@@ -424,7 +444,7 @@ export default function App() {
               onUndo={undoInsert}
               onReplace={() => openPanel('replace')}
             />
-            {entryHintVisible && !panelOpen && selection === 'none' && (
+            {entryHintPhase === 'visible' && (
               <div className="entry-hint" role="status">
                 <span>需要补充画面时，可以从这里开始。</span>
                 <button
