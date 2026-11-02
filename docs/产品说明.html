@@ -1,0 +1,1311 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>补镜 · 产品说明</title>
+    <style>
+      :root {
+        --paper: #faf7f0;
+        --paper-2: #f3eee4;
+        --ink: #23211d;
+        --ink-2: #4c4942;
+        --muted: #7f7a70;
+        --line: #d9d1c2;
+        --amber: #b87918;
+        --amber-bg: #f4e7ce;
+        --green: #3f6b54;
+        --green-bg: #e6efe6;
+        --red: #a64c3d;
+        --red-bg: #f6e7e2;
+        --mono: "SF Mono", "Roboto Mono", Menlo, monospace;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #e7e2d8;
+        color: var(--ink);
+        font-family:
+          -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+          "Microsoft YaHei", "Segoe UI", sans-serif;
+        font-size: 11.5px;
+        line-height: 1.68;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      .page {
+        width: 210mm;
+        height: 297mm;
+        padding: 15mm 15mm 12mm;
+        margin: 0 auto;
+        background: var(--paper);
+        position: relative;
+        overflow: hidden;
+        page-break-after: always;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+
+      .page::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          radial-gradient(90mm 55mm at 100% 0%, rgba(184, 121, 24, 0.06), transparent 70%),
+          radial-gradient(80mm 60mm at 0% 100%, rgba(63, 107, 84, 0.045), transparent 70%);
+      }
+
+      .page > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .page-foot {
+        margin-top: auto;
+        padding-top: 7mm;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 8.5px;
+        letter-spacing: 0.03em;
+      }
+
+      .page-foot .internal {
+        color: var(--red);
+      }
+
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--amber);
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .eyebrow::before {
+        content: "";
+        width: 14px;
+        height: 1.5px;
+        background: var(--amber);
+      }
+
+      h1 {
+        margin: 7px 0 0;
+        font-size: 42px;
+        line-height: 1.1;
+        font-weight: 750;
+        letter-spacing: 0.02em;
+      }
+
+      h2 {
+        margin: 5px 0 0;
+        font-size: 24px;
+        line-height: 1.3;
+        font-weight: 700;
+        letter-spacing: 0.01em;
+      }
+
+      h3 {
+        margin: 0 0 3px;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      .lead {
+        margin-top: 8px;
+        color: var(--ink-2);
+        font-size: 14px;
+        line-height: 1.65;
+        letter-spacing: 0.01em;
+      }
+
+      .topline {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 20px;
+        color: var(--muted);
+        font-size: 8.5px;
+        letter-spacing: 0.06em;
+      }
+
+      .topline strong {
+        color: var(--ink);
+        font-weight: 700;
+        letter-spacing: 0.1em;
+      }
+
+      .rule {
+        height: 1px;
+        background: var(--line);
+        margin: 10px 0 0;
+      }
+
+      .kicker-strip {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 11px;
+      }
+
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 2px 7px;
+        border-radius: 99px;
+        border: 1px solid var(--line);
+        color: var(--ink-2);
+        font-size: 8.5px;
+        white-space: nowrap;
+      }
+
+      .pill.is-amber {
+        color: var(--amber);
+        border-color: #e4c995;
+        background: var(--amber-bg);
+      }
+
+      .pill.is-green {
+        color: var(--green);
+        border-color: #c8d9cb;
+        background: var(--green-bg);
+      }
+
+      .two-col {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10mm;
+      }
+
+      .two-col.wide-left {
+        grid-template-columns: 1.25fr 0.75fr;
+      }
+
+      .block {
+        margin-top: 6mm;
+      }
+
+      .block-label {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 8px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .block-label.green {
+        color: var(--green);
+      }
+
+      .mini-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: var(--ink-2);
+        font-size: 10px;
+        line-height: 1.68;
+      }
+
+      .mini-list li {
+        position: relative;
+        padding-left: 12px;
+      }
+
+      .mini-list li + li {
+        margin-top: 3px;
+      }
+
+      .mini-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.68em;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--amber);
+      }
+
+      .mini-list.green li::before {
+        background: var(--green);
+      }
+
+      .figure {
+        margin-top: 5mm;
+        border-radius: 7px;
+        border: 1px solid var(--line);
+        background: #fff;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(35, 33, 29, 0.08);
+      }
+
+      .figure img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .caption {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 5px 8px 6px;
+        color: var(--muted);
+        font-size: 8px;
+        line-height: 1.5;
+        border-top: 1px solid #ece5d9;
+        background: #fffdf8;
+      }
+
+      .caption strong {
+        color: var(--ink-2);
+        font-weight: 600;
+      }
+
+      .hero-figure {
+        margin-top: 6mm;
+      }
+
+      .note-box {
+        margin-top: 4mm;
+        padding: 3mm 3.5mm;
+        border-radius: 5px;
+        border: 1px solid #e6d6b6;
+        background: #f8f0df;
+        color: #6d542d;
+        font-size: 9px;
+        line-height: 1.6;
+      }
+
+      .note-box strong {
+        color: var(--amber);
+      }
+
+      .green-box {
+        margin-top: 4mm;
+        padding: 3mm 3.5mm;
+        border-radius: 5px;
+        border: 1px solid #cbdacd;
+        background: var(--green-bg);
+        color: #3c5d49;
+        font-size: 9px;
+        line-height: 1.6;
+      }
+
+      .red-box {
+        padding: 3.5mm;
+        border-radius: 5px;
+        border: 1px solid #e3b8ad;
+        background: var(--red-bg);
+        color: var(--red);
+        font-size: 9.5px;
+        line-height: 1.65;
+      }
+
+      .flow-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5mm 6mm;
+        margin-top: 6mm;
+      }
+
+      .step {
+        display: flex;
+        gap: 4mm;
+        min-width: 0;
+      }
+
+      .step-num {
+        flex: 0 0 auto;
+        width: 7mm;
+        height: 7mm;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: var(--mono);
+        font-size: 8px;
+      }
+
+      .step h3 {
+        margin-top: 1px;
+        font-size: 10.5px;
+      }
+
+      .step p {
+        color: var(--ink-2);
+        font-size: 9.3px;
+        line-height: 1.62;
+      }
+
+      .shot-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4mm;
+        margin-top: 5mm;
+      }
+
+      .shot {
+        margin: 0;
+        border-radius: 5px;
+        border: 1px solid var(--line);
+        background: #fff;
+        overflow: hidden;
+      }
+
+      .shot img {
+        display: block;
+        width: 100%;
+        height: auto;
+      }
+
+      .shot figcaption {
+        padding: 4px 6px 5px;
+        border-top: 1px solid #ece5d9;
+        color: var(--muted);
+        font-size: 7.5px;
+        line-height: 1.5;
+      }
+
+      .shot figcaption strong {
+        color: var(--ink-2);
+        font-weight: 600;
+      }
+
+      .bottom-strip {
+        margin-top: auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        padding-top: 4mm;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 8.5px;
+      }
+
+      .bottom-strip strong {
+        color: var(--ink-2);
+        font-weight: 600;
+      }
+
+      .judgement-list {
+        display: flex;
+        flex-direction: column;
+        gap: 3.8mm;
+      }
+
+      .judgement {
+        padding-left: 4mm;
+        border-left: 2px solid #e2d3b6;
+      }
+
+      .judgement:nth-child(2) {
+        border-left-color: #cdddcf;
+      }
+
+      .judgement h3 {
+        color: var(--ink);
+        font-size: 10.5px;
+      }
+
+      .judgement p {
+        color: var(--ink-2);
+        font-size: 9.5px;
+        line-height: 1.64;
+      }
+
+      .risk-box {
+        margin-top: 4mm;
+        padding: 3.5mm;
+        border-radius: 5px;
+        background: #2a2722;
+        color: #f2eadc;
+      }
+
+      .risk-box h3 {
+        color: #f0bd55;
+        font-size: 10px;
+        margin-bottom: 2mm;
+      }
+
+      .risk-box p {
+        color: #d4cbbb;
+        font-size: 9.3px;
+        line-height: 1.65;
+      }
+
+      .small-copy {
+        color: var(--muted);
+        font-size: 8.5px;
+        line-height: 1.6;
+      }
+
+      .placeholder-page {
+        justify-content: flex-start;
+      }
+
+      .draft-banner {
+        display: flex;
+        align-items: flex-start;
+        gap: 3mm;
+        padding: 3.5mm;
+        border: 1px solid #d9a79a;
+        border-radius: 5px;
+        background: var(--red-bg);
+        color: var(--red);
+      }
+
+      .draft-banner strong {
+        display: block;
+        font-size: 11px;
+        margin-bottom: 1mm;
+      }
+
+      .draft-banner p {
+        font-size: 9px;
+        line-height: 1.6;
+      }
+
+      .draft-badge {
+        flex: 0 0 auto;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 9mm;
+        height: 9mm;
+        border-radius: 50%;
+        border: 1px dashed var(--red);
+        font-family: var(--mono);
+        font-size: 7px;
+        letter-spacing: 0.05em;
+      }
+
+      .prompt-form {
+        margin-top: 8mm;
+        display: flex;
+        flex-direction: column;
+        gap: 7mm;
+      }
+
+      .prompt-row {
+        display: flex;
+        gap: 4mm;
+        align-items: flex-start;
+      }
+
+      .prompt-index {
+        flex: 0 0 auto;
+        width: 8mm;
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 9px;
+      }
+
+      .prompt-content {
+        flex: 1;
+      }
+
+      .prompt-content h3 {
+        font-size: 11.5px;
+        margin-bottom: 2mm;
+      }
+
+      .prompt-content p {
+        color: var(--muted);
+        font-size: 9px;
+        line-height: 1.6;
+      }
+
+      .blank-line {
+        height: 11mm;
+        border-bottom: 1px dashed #cfc5b3;
+      }
+
+      .blank-line.short {
+        height: 8mm;
+      }
+
+      .prompt-form .note {
+        margin-top: 1mm;
+        color: var(--muted);
+        font-size: 8px;
+      }
+
+      .link-table {
+        margin-top: 4mm;
+        border: 1px solid var(--line);
+        border-radius: 5px;
+        overflow: hidden;
+        background: #fffdf8;
+      }
+
+      .link-row {
+        display: grid;
+        grid-template-columns: 26mm 1fr;
+        gap: 3mm;
+        padding: 2.4mm 3mm;
+        border-bottom: 1px solid #ece5d9;
+        font-size: 9px;
+      }
+
+      .link-row:last-child {
+        border-bottom: 0;
+      }
+
+      .link-row span {
+        color: var(--muted);
+      }
+
+      .link-row strong {
+        color: var(--ink-2);
+        font-weight: 500;
+        word-break: break-all;
+      }
+
+      .link-row a {
+        color: var(--amber);
+        text-decoration: none;
+      }
+
+      .check-list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        color: var(--ink-2);
+        font-size: 9px;
+        line-height: 1.6;
+        columns: 2;
+        column-gap: 6mm;
+      }
+
+      .check-list li {
+        position: relative;
+        padding-left: 11px;
+        break-inside: avoid;
+        margin-bottom: 1.6mm;
+      }
+
+      .check-list li::before {
+        content: "✓";
+        position: absolute;
+        left: 0;
+        top: 0;
+        color: var(--green);
+        font-size: 8px;
+        font-weight: 700;
+      }
+
+      .check-list li.pending::before {
+        content: "○";
+        color: var(--red);
+      }
+
+      .ai-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5mm;
+        margin-top: 4mm;
+      }
+
+      .ai-card {
+        padding: 3.2mm;
+        border-radius: 5px;
+        border: 1px solid var(--line);
+        background: #fffdf8;
+      }
+
+      .ai-card h3 {
+        color: var(--ink);
+        font-size: 10px;
+      }
+
+      .ai-card p,
+      .ai-card li {
+        color: var(--ink-2);
+        font-size: 8.8px;
+        line-height: 1.6;
+      }
+
+      .ai-card ul {
+        margin: 0;
+        padding-left: 12px;
+      }
+
+      .ai-card li + li {
+        margin-top: 1.5mm;
+      }
+
+      .passage {
+        margin-top: 3mm;
+        color: var(--ink-2);
+        font-size: 9.2px;
+        line-height: 1.62;
+      }
+
+      .passage strong {
+        color: var(--ink);
+      }
+
+      .mono {
+        font-family: var(--mono);
+        font-size: 0.92em;
+      }
+
+      .principle-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 5mm;
+        margin-top: 6mm;
+      }
+
+      .principle {
+        padding-top: 3mm;
+        border-top: 1.5px solid var(--ink);
+      }
+
+      .principle span {
+        display: block;
+        color: var(--amber);
+        font-family: var(--mono);
+        font-size: 8px;
+        letter-spacing: 0.08em;
+        margin-bottom: 1.5mm;
+      }
+
+      .principle strong {
+        display: block;
+        font-size: 10.5px;
+        font-weight: 700;
+      }
+
+      .principle p {
+        margin-top: 1.2mm;
+        color: var(--muted);
+        font-size: 8.8px;
+        line-height: 1.55;
+      }
+
+      .style-table {
+        width: 100%;
+        margin-top: 3mm;
+        border-collapse: collapse;
+        table-layout: fixed;
+        font-size: 8.7px;
+        line-height: 1.55;
+      }
+
+      .style-table th {
+        padding: 2mm 2.2mm;
+        border-top: 1.5px solid var(--ink);
+        border-bottom: 1px solid var(--line);
+        color: var(--muted);
+        text-align: left;
+        font-size: 7.5px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+      }
+
+      .style-table td {
+        padding: 2mm 2.2mm;
+        border-bottom: 1px solid #e7dfd2;
+        vertical-align: top;
+        color: var(--ink-2);
+      }
+
+      .style-table th:nth-child(1),
+      .style-table td:nth-child(1) {
+        width: 34mm;
+      }
+
+      .style-table th:nth-child(2),
+      .style-table td:nth-child(2) {
+        width: 45mm;
+      }
+
+      .style-table td:nth-child(1) {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .style-table td:nth-child(2) {
+        color: var(--amber);
+      }
+
+      .style-block {
+        margin-top: 7mm;
+        padding-top: 4mm;
+        border-top: 1px solid var(--line);
+      }
+
+      .verify-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 6mm;
+        margin-top: 4mm;
+      }
+
+      .check-list.single {
+        columns: 1;
+      }
+
+      .verification-note {
+        margin-top: 5mm;
+        padding: 3mm 3.5mm;
+        border-radius: 5px;
+        border: 1px solid #e6d6b6;
+        background: #f8f0df;
+        color: #6d542d;
+        font-size: 8.8px;
+        line-height: 1.58;
+      }
+
+      .verification-note strong {
+        color: var(--amber);
+      }
+
+      @media screen {
+        body {
+          padding: 12mm 0;
+        }
+
+        .page {
+          box-shadow: 0 14px 50px rgba(35, 33, 29, 0.16);
+          margin-bottom: 10mm;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .page {
+          box-shadow: none;
+          margin: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- PAGE 1 -->
+    <section class="page">
+      <div class="topline">
+        <span><strong>补镜</strong> / 产品说明</span>
+        <span>2026.11 · 交互 Demo 内部稿</span>
+      </div>
+      <div class="rule"></div>
+
+      <div style="margin-top: 10mm">
+        <div class="eyebrow">剪辑器内的补镜功能</div>
+        <h1>补镜</h1>
+        <p class="lead" style="max-width: 160mm">
+          在剪辑时间线上，补一段“能用”的镜头。
+        </p>
+        <p style="margin-top: 4mm; color: var(--ink-2); font-size: 10.5px; max-width: 164mm">
+          帮助创作者在剪辑缺少辅助画面时，结合当前位置的内容需求与原片表达风格，检索已有素材或按需生成镜头，预览后补入时间线。
+        </p>
+        <div class="kicker-strip">
+          <span class="pill is-amber">4 秒待补区间</span>
+          <span class="pill is-green">素材库 / AI 生成</span>
+          <span class="pill">可选原片分析</span>
+          <span class="pill">上下文预览</span>
+          <span class="pill">插入 · 撤销 · 替换</span>
+        </div>
+      </div>
+
+      <div class="two-col" style="margin-top: 8mm">
+        <div>
+          <span class="block-label">产品与用户</span>
+          <h3>会基础剪辑的科普视频创作者</h3>
+          <p class="small-copy">
+            用口播或脚本制作城市科普视频。已有明确的剪辑任务和表达意图，但缺少一段辅助画面。
+          </p>
+          <p class="small-copy" style="margin-top: 2.5mm">
+            <strong style="color: var(--ink-2)">场景：</strong>
+            漫画风城市科普，口播已完成；讲到城市绿化时，需要补一段 4 秒“风吹树冠”的画面。
+          </p>
+        </div>
+        <div>
+          <span class="block-label green">本次假设</span>
+          <h3>找到同一对象，仍不一定能直接用</h3>
+          <p class="small-copy">
+            检索可能返回实拍、强风或不同画风。对象相符，但表现形式、情绪、运动或时长不合适，用户仍要反复筛选、生成、回时间线试用。
+          </p>
+          <p class="small-copy" style="margin-top: 2.5mm">
+            本次 Demo 只验证这条产品假设，不提供用户规模、节省时间或成功率数据。
+          </p>
+        </div>
+      </div>
+
+      <figure class="figure hero-figure">
+        <img src="assets/overview.png" alt="补镜演示项目的初始界面" />
+        <figcaption class="caption">
+          <span><strong>预设项目「城市里的树」</strong> · 15 秒 · 16:9 · 口播完整</span>
+          <span>5–9 秒为 4.0 秒待补区间</span>
+        </figcaption>
+      </figure>
+
+      <div class="note-box">
+        <strong>演示范围</strong> · 这是纯前端交互 Demo。原片解析、检索与生成均使用预制示例；不上传原片、不调用模型或素材 API，不含登录与后台。
+      </div>
+
+      <div class="principle-row">
+        <div class="principle">
+          <span>01</span>
+          <strong>从时间线开始</strong>
+          <p>位置、时长与前后镜头已经确定，不必重新描述上下文。</p>
+        </div>
+        <div class="principle">
+          <span>02</span>
+          <strong>双来源共用条件</strong>
+          <p>常见画面先复用素材；特殊表现再尝试生成，不让两者混为一谈。</p>
+        </div>
+        <div class="principle">
+          <span>03</span>
+          <strong>在上下文里确认</strong>
+          <p>候选先和前后镜头一起看；确认后才覆盖正式时间线。</p>
+        </div>
+      </div>
+
+      <footer class="page-foot">
+        <span>补镜 · 产品说明</span>
+        <span>1 / 5</span>
+      </footer>
+    </section>
+
+    <!-- PAGE 2 -->
+    <section class="page">
+      <div class="topline">
+        <span><strong>补镜</strong> / 主流程</span>
+        <span>从时间线进入 · 在上下文中确认</span>
+      </div>
+      <div class="rule"></div>
+
+      <div style="margin-top: 7mm">
+        <div class="eyebrow">Flow</div>
+        <h2>一次补镜，六步完成</h2>
+        <p class="lead" style="font-size: 11px; margin-top: 3mm">
+          需求、时长、画幅跟着区间走；两条来源共用同一组条件；候选先看上下文，再决定是否覆盖正式时间线。
+        </p>
+      </div>
+
+      <div class="flow-grid">
+        <div class="step">
+          <span class="step-num">01</span>
+          <div>
+            <h3>从时间线进入</h3>
+            <p>点击 4.0 秒待补区间，再点“补充空镜”。时长 4.0 秒、画幅 16:9、保留口播从区间自动带入。</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">02</span>
+          <div>
+            <h3>输入内容需求</h3>
+            <p>写下“风吹树冠，不要人物。”；提供同一句的示例入口，减少演示与输入成本。</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">03</span>
+          <div>
+            <h3>可选参考原片</h3>
+            <p>开关默认关闭。开启后对比前后相邻镜头，得到可修改摘要：科普讲解 · 漫画表现 · 轻松。视频类型不会被硬性等同于某一种表现形式。</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">04</span>
+          <div>
+            <h3>两条来源，一套条件</h3>
+            <p>素材库候选显示来源、合成/实拍属性与许可入口；每条可单独预览。切到 AI 生成不会自动发起，点击生成才进入加载。</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">05</span>
+          <div>
+            <h3>先在上下文里看</h3>
+            <p>单独预览候选，或播放“前镜头 → 候选 → 后镜头”。预览不会改动正式时间线。</p>
+          </div>
+        </div>
+        <div class="step">
+          <span class="step-num">06</span>
+          <div>
+            <h3>确认后补入</h3>
+            <p>插入后更新 4 秒区间与主预览，口播保持连续；可撤销、可替换。生成失败保留需求和条件，可重试；支持一次“强风改微风”修改。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="shot-grid">
+        <figure class="shot">
+          <img src="assets/gap.png" alt="选中待补区间后的界面" />
+          <figcaption>
+            <strong>1 · 选中缺口</strong> · 主预览显式标出待补画面，而不是假装已有内容。
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/panel-analysis.png" alt="参考原片分析与素材库面板" />
+          <figcaption>
+            <strong>2 · 可选分析</strong> · 参考对象可见；摘要逐项可改，关闭后新的请求不再使用自动条件。
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/context-real.png" alt="实拍观感候选的上下文预览" />
+          <figcaption>
+            <strong>3 · 对象匹配，表达不匹配</strong> · 写实观感与强风对照当前漫画、轻风条件均不合适。
+          </figcaption>
+        </figure>
+        <figure class="shot">
+          <img src="assets/inserted.png" alt="补入后主预览与时间线同步更新" />
+          <figcaption>
+            <strong>4 · 补入并保留口播</strong> · 四秒区间更新，字幕与口播波形连续；可撤销或替换。
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="bottom-strip">
+        <span><strong>同一流程也覆盖生成路径：</strong>生成、失败重试、一次修改与版本对照。</span>
+        <span>2 / 5</span>
+      </div>
+    </section>
+
+    <!-- PAGE 3 -->
+    <section class="page">
+      <div class="topline">
+        <span><strong>补镜</strong> / 判断与取舍</span>
+        <span>为什么这样设计，哪里可能失败</span>
+      </div>
+      <div class="rule"></div>
+
+      <div class="two-col wide-left" style="margin-top: 7mm">
+        <div>
+          <div class="eyebrow">Decisions</div>
+          <h2>判断与取舍</h2>
+
+          <div class="judgement-list" style="margin-top: 5mm">
+            <div class="judgement">
+              <h3>为什么从时间线进入</h3>
+              <p>
+                位置、时长和前后镜头已经确定。让用户从区间开始，系统就不必重新询问上下文，补入结果也能直接放回原片判断。
+              </p>
+            </div>
+            <div class="judgement">
+              <h3>为什么有双来源</h3>
+              <p>
+                常见画面可以复用已有素材；特殊表现要求可以尝试生成。真实对象和事实性素材不应被随意生成替代，因此素材库优先保留，不宣称两者等价。
+              </p>
+            </div>
+            <div class="judgement">
+              <h3>为什么允许修改解析</h3>
+              <p>
+                视频类型并不能唯一决定表现形式和氛围；“科普”也不自动等于实拍。系统可能判断错误，用户必须能纠正摘要，而不是被迫接受一次自动判断。
+              </p>
+            </div>
+            <div class="judgement">
+              <h3>为什么不做自动扫描</h3>
+              <p>
+                本次让用户明确指定缺口，控制误判与实现范围。全片扫描、自动成片与复杂时间轴编辑都不在 Demo 边界内。
+              </p>
+            </div>
+            <div class="judgement">
+              <h3>如果只能留一个功能</h3>
+              <p>
+                保留“按当前视频表达风格匹配补充镜头”的能力，优先做好现有素材路径。生成是补充，不是唯一答案。
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <span class="block-label">Risk</span>
+          <h3 style="font-size: 13px">最可能失败的地方</h3>
+          <p class="small-copy" style="font-size: 9.5px; margin-top: 2mm">
+            系统看起来理解了风格，结果放回上下文仍然不协调；生成等待与反复试错，可能超过用户自己找素材的成本。
+          </p>
+
+          <figure class="figure" style="margin-top: 4mm">
+            <img src="assets/context-best.png" alt="候选镜头与前后镜头一起播放" />
+            <figcaption class="caption">
+              <span><strong>上下文预览</strong> · 只有放回前后镜头，才能判断是否真的协调。</span>
+            </figcaption>
+          </figure>
+
+          <div class="risk-box">
+            <h3>后续验证只作为观察问题</h3>
+            <p>
+              用户能否选到愿意插入的镜头？需要修改几次？与原有找素材流程相比是否更省事？本材料不提供也未编造验证结果。
+            </p>
+          </div>
+
+          <div class="green-box">
+            <strong>边界</strong> · 不做全片扫描、自动成片、真实上传、模型选择、登录或支付。演示中的失败是独立的演示开关，不在主流程随机失败。
+          </div>
+        </div>
+      </div>
+
+      <div class="passage" style="margin-top: 5mm; padding-top: 3.5mm; border-top: 1px solid var(--line)">
+        <strong>产品判断摘要：</strong>
+        这个用户已经有创作意图与剪辑任务，缺口具体，结果是否能用可以直接放回原片判断。核心问题不是“找不到树”，而是“找到的树不一定适合当前表达”。补镜把筛选与试用压缩到时间线内，同时保留用户对风格判断的最终决定权。
+      </div>
+
+      <div class="style-block">
+        <span class="block-label">Style layers</span>
+        <h3 style="font-size: 12px">参考原片，不等于色温、滤镜和颗粒</h3>
+        <p class="small-copy" style="margin-top: 1.5mm">
+          界面用简短摘要承载判断，不让用户填写完整参数表；每一项都可以被用户纠正。
+        </p>
+        <table class="style-table">
+          <thead>
+            <tr>
+              <th>层次</th>
+              <th>本次示例</th>
+              <th>对结果的影响</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>视频类型与表达目的</td>
+              <td>科普讲解</td>
+              <td>画面便于理解，不抢讲解重点。</td>
+            </tr>
+            <tr>
+              <td>视觉表现形式</td>
+              <td>漫画</td>
+              <td>优先漫画素材，或生成漫画画面。</td>
+            </tr>
+            <tr>
+              <td>调性与氛围</td>
+              <td>轻松</td>
+              <td>不用阴森、惊悚或强烈压迫的表现。</td>
+            </tr>
+            <tr>
+              <td>当前镜头用途</td>
+              <td>辅助讲述城市绿化</td>
+              <td>展示树冠，避免无关主体。</td>
+            </tr>
+            <tr>
+              <td>基本约束</td>
+              <td>四秒、项目比例、轻微运动</td>
+              <td>放进指定区间能使用。</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="small-copy" style="margin-top: 2.5mm">
+          “科普”不能自动等于“实拍”或某种固定风格；因此解析结果需要可修改、可关闭，关闭后不再用于新的请求。
+        </p>
+      </div>
+
+      <footer class="page-foot">
+        <span>补镜 · 产品说明</span>
+        <span>3 / 5</span>
+      </footer>
+    </section>
+
+    <!-- PAGE 4 -->
+    <section class="page placeholder-page">
+      <div class="topline">
+        <span><strong>补镜</strong> / 个人经历</span>
+        <span>内部待补 · 不用于提交</span>
+      </div>
+      <div class="rule"></div>
+
+      <div style="margin-top: 7mm">
+        <div class="eyebrow">Personal reference</div>
+        <h2>本人喜欢的产品</h2>
+      </div>
+
+      <div class="draft-banner" style="margin-top: 6mm">
+        <span class="draft-badge">待补</span>
+        <div>
+          <strong>这一页必须由本人补充真实经历</strong>
+          <p>
+            不得用模板、虚构产品或编造影响代写。当前仅保留结构，PDF 为内部稿；补齐后删除本横幅与红色待补标记，再导出最终版。
+          </p>
+        </div>
+      </div>
+
+      <div class="prompt-form">
+        <div class="prompt-row">
+          <span class="prompt-index">01</span>
+          <div class="prompt-content">
+            <h3>产品或服务名称</h3>
+            <p>一个你实际长期使用、真正喜欢的产品。不要写补镜或本次 Demo 本身。</p>
+            <div class="blank-line short"></div>
+          </div>
+        </div>
+        <div class="prompt-row">
+          <span class="prompt-index">02</span>
+          <div class="prompt-content">
+            <h3>你喜欢它的原因</h3>
+            <p>具体到一次使用体验、一个设计取舍，或它解决了你的什么问题。</p>
+            <div class="blank-line"></div>
+            <div class="blank-line"></div>
+          </div>
+        </div>
+        <div class="prompt-row">
+          <span class="prompt-index">03</span>
+          <div class="prompt-content">
+            <h3>它对你的一点影响</h3>
+            <p>例如改变了你的工作方式、习惯，或让你对好产品有了新的判断标准。</p>
+            <div class="blank-line"></div>
+            <div class="blank-line"></div>
+          </div>
+        </div>
+        <div class="prompt-row">
+          <span class="prompt-index">04</span>
+          <div class="prompt-content">
+            <h3>你从中借鉴了什么</h3>
+            <p>可选。与补镜或其他产品判断相关的具体启发。</p>
+            <div class="blank-line"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="note-box" style="margin-top: 8mm">
+        <strong>内部操作说明（提交前删除）</strong><br />
+        编辑 <span class="mono">docs/产品说明.html</span> 中本页的
+        <span class="mono">prompt-form</span> 区块，替换为真实内容；删除
+        <span class="mono">draft-banner</span> 与页脚“内部待补”字样，再重新导出 PDF。
+        不要保留任何空白占位或虚构信息。
+      </div>
+
+      <footer class="page-foot">
+        <span class="internal">内部待补 · 需本人补充真实经历</span>
+        <span>4 / 5</span>
+      </footer>
+    </section>
+
+    <!-- PAGE 5 -->
+    <section class="page">
+      <div class="topline">
+        <span><strong>补镜</strong> / AI 使用与交付</span>
+        <span>模拟范围 · 验证状态 · 链接</span>
+      </div>
+      <div class="rule"></div>
+
+      <div style="margin-top: 6mm">
+        <div class="eyebrow">AI use &amp; handoff</div>
+        <h2>AI 使用摘要与交付说明</h2>
+        <p class="lead" style="font-size: 10.5px; margin-top: 2.5mm">
+          本产品内不调用真实模型或素材 API。AI 只用于产品梳理、工程实现与演示资源制作；预制结果不被描述为在线 AI 能力。
+        </p>
+      </div>
+
+      <div class="ai-grid">
+        <div class="ai-card">
+          <h3>Codex</h3>
+          <ul>
+            <li>协助梳理产品方向、核对类似功能、收敛补镜交互。</li>
+            <li>协助编写交接说明；本摘要依据交接说明记录，不扩写未发生的工作。</li>
+          </ul>
+        </div>
+        <div class="ai-card">
+          <h3>Claude Code（CC，本会话）</h3>
+          <ul>
+            <li>实现 React + Canvas 交互 Demo，制作自制程序动画与系统 TTS 口播。</li>
+            <li>完成素材库/生成双路径、上下文预览、插入撤销替换、失败重试。</li>
+            <li>录制并剪辑操作演示（系统 TTS 旁白），编写自动化验证与说明文档，执行构建与部署。</li>
+          </ul>
+        </div>
+        <div class="ai-card">
+          <h3>用户本人</h3>
+          <ul>
+            <li>决定做补镜小功能、双来源、视频类型与风格适配、轻量授权。</li>
+            <li>限制 Demo 投入与范围；第 4 页个人经历尚待本人补充。</li>
+          </ul>
+        </div>
+        <div class="ai-card">
+          <h3>记录边界</h3>
+          <ul>
+            <li>未使用的工具不写入；DS 或其他工具如实际使用，请本人按真实情况补充。</li>
+            <li>不把预制示例、程序动画或系统 TTS 写成在线模型能力。</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="link-table">
+        <div class="link-row">
+          <span>Demo 链接</span>
+          <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/">https://qliuncoco7-byte.github.io/bujing-demo/</a></strong>
+        </div>
+        <div class="link-row">
+          <span>源码仓库</span>
+          <strong><a href="https://github.com/qliuncoco7-byte/bujing-demo">https://github.com/qliuncoco7-byte/bujing-demo</a></strong>
+        </div>
+        <div class="link-row">
+          <span>操作录屏</span>
+          <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4">https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4</a> · 约 2 分 07 秒</strong>
+        </div>
+        <div class="link-row">
+          <span>说明 PDF</span>
+          <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf">https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf</a> · 可编辑源文件：docs/产品说明.html</strong>
+        </div>
+      </div>
+
+      <div class="verify-grid">
+        <div>
+          <span class="block-label green">已核验</span>
+          <ul class="check-list single">
+            <li>无登录打开预设项目，待补区间可理解</li>
+            <li>不开启解析可继续，随后可再次开启</li>
+            <li>素材库与生成路径均可操作，切换不丢需求</li>
+            <li>上下文预览可播放，预览不改正式时间线</li>
+            <li>插入后主预览和时间线确实变化，口播连续</li>
+            <li>撤销、替换、失败重试与重置均可操作</li>
+            <li>不调用付费模型，不上传原片</li>
+          </ul>
+        </div>
+        <div>
+          <span class="block-label">模拟范围</span>
+          <p class="small-copy" style="font-size: 8.8px">
+            只覆盖“风吹树冠”4 秒示例。示例画面均由本项目 Canvas 程序动画制作；“实拍观感”候选刻意模拟写实画面，并非真实拍摄，也不代表素材库授权。口播与操作录屏旁白均由 macOS 系统 TTS 生成；“AI 生成”为预制程序动画，不是在线模型输出。当前 Demo 覆盖预制的“强风改微风”一次修改和可独立触发的失败状态。
+          </p>
+          <span class="block-label" style="margin-top: 3.5mm">仍待补</span>
+          <ul class="check-list single">
+            <li class="pending">第 4 页本人真实经历</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="verification-note">
+        <strong>验证方式</strong> · 核心流程由 Playwright 在 Chrome 中逐项走通，并截图核对画面、时间线与口播状态。未进行用户访谈或效果测量，所以不提供成功率、节省时间或满意度数字。
+      </div>
+
+      <footer class="page-foot">
+        <span>补镜 · 产品说明 · 2026.11</span>
+        <span>5 / 5</span>
+      </footer>
+    </section>
+  </body>
+</html>
