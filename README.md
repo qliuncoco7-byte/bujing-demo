@@ -1,10 +1,10 @@
 # 补镜 · 剪辑器内的辅助画面检索与生成 Demo
 
-一个纯前端交互 Demo：在简化剪辑工作区里，为 4 秒待补画面输入需求，可选参考前后镜头，比较素材库候选或生成候选，先做上下文预览，再插入、替换或撤销。
+一个纯前端交互 Demo：在简化剪辑工作区里主动调用「补镜」，为 4 秒空档输入需求，可选参考前后镜头，比较素材库候选或生成候选，先做上下文预览，再插入、替换或撤销。
 
 - **Demo**：https://qliuncoco7-byte.github.io/bujing-demo/
-- **操作录屏**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4（约 2 分 07 秒，含系统 TTS 旁白；本地同文件 `public/deliverables/bujing-demo.mp4`）
-- **产品说明 PDF**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf（5 页，内部稿；第 4 页待本人补充）
+- **操作录屏**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4（约 2 分 06 秒，含系统 TTS 旁白；本地同文件 `public/deliverables/bujing-demo.mp4`）
+- **产品说明 PDF**：https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-product-notes.pdf（5 页，已补齐个人经历）
 - **重新导出 PDF**：编辑 `docs/产品说明.html` 后运行 `node scripts/export_notes.mjs docs/产品说明.html public/deliverables/bujing-product-notes.pdf`
 - **源码仓库**：https://github.com/qliuncoco7-byte/bujing-demo
 - **说明源文件**：`docs/产品说明.html`
@@ -23,8 +23,8 @@ npm run preview    # 预览生产构建
 
 ## 演示路径
 
-1. 打开预设项目「城市里的树」，点击时间线上 5–9 秒的「待补画面」区间。
-2. 点击「补充空镜」，输入（或填入示例）「风吹树冠，不要人物。」。
+1. 打开预设项目「城市里的树」；点击时间线标题栏的「补镜」入口，或点击 5–9 秒的「空档」区间。
+2. 在补镜面板输入（或填入示例）「风吹树冠，不要人物。」。
 3. 可选开启「参考原片匹配」，查看并修改摘要：科普讲解 · 漫画表现 · 轻松；参考范围是前后相邻镜头。
 4. 在「素材库」比较 3 条示例候选：
    - 实拍观感、强风：对象匹配，但表现形式与运动不匹配；
@@ -84,7 +84,8 @@ node scripts/visual_check.mjs       # 全流程截图
 
 当前机器的系统输出处于静音状态（`output muted: true`），因此未在此环境完成听感确认；口播轨道在时间线上连续，音频时长为 15.07 秒，建议在有声环境复核音频。验证在 Chrome（Playwright）中完成，未做用户访谈或效果测量。
 
-## 仍需本人补充
+## 仍需本人确认
 
-- **产品说明第 4 页「本人喜欢的产品」**：`docs/产品说明.html` 中保留了内部待补区块。必须由本人提供真实经历后替换，并删除该页内部待补标记，再重新导出 PDF。
+- 本机系统输出当前静音，建议在有声环境复核口播与录屏旁白；口播文件已加载并在播放/插入时触发，录屏 MP4 含 AAC 旁白音轨。
 - 如果使用 DeepSeek 或其他工具，请在 `docs/ai-usage-record.md` 的相应位置按实际补充；本记录不虚构未发生的工作。
+- 最终提交前确认演示链接、视频、PDF 与说明中的模拟范围表述一致。

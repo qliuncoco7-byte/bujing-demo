@@ -29,13 +29,14 @@ const overlayCss = `
   #demo-intro.is-visible { opacity: 1; }
   .demo-intro-card { text-align: center; }
   .demo-intro-mark { width: 62px; height: 62px; margin: 0 auto 18px; border-radius: 18px;
-    display: grid; place-items: center; color: #221b0b; background: linear-gradient(145deg,#ffd782,#f5c15a);
-    font-size: 30px; box-shadow: 0 18px 50px rgba(245,193,90,.25); }
+    display: grid; place-items: center; background: linear-gradient(145deg,#ffd782,#f5c15a);
+    box-shadow: 0 18px 50px rgba(245,193,90,.25); }
+  .demo-intro-mark svg { display: block; width: 34px; height: 34px; }
   .demo-intro-card h1 { margin: 0; font-size: 52px; letter-spacing: .14em; font-weight: 700; }
   .demo-intro-card p { margin: 14px 0 0; color: rgba(255,248,232,.68); font-size: 16px; letter-spacing: .02em; }
   .demo-intro-card small { display: block; margin-top: 22px; color: rgba(255,248,232,.38);
     font-size: 11px; letter-spacing: .08em; }
-  #demo-caption { position: fixed; top: 84px; left: 250px; z-index: 2147483000;
+  #demo-caption { position: fixed; top: 150px; left: 24px; z-index: 2147483000;
     transform: translateY(-6px); max-width: 470px; padding: 9px 16px; border-radius: 10px;
     background: rgba(14,15,18,.9); border: 1px solid rgba(245,193,90,.3);
     box-shadow: 0 12px 30px rgba(0,0,0,.3); color: #fff8e8; font-size: 14px; line-height: 1.5;
@@ -63,7 +64,12 @@ async function injectOverlay() {
     intro.id = 'demo-intro'
     intro.innerHTML = `
       <div class="demo-intro-card">
-        <div class="demo-intro-mark">叶</div>
+        <div class="demo-intro-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 14C34 13.5 20 21 20 33a9 9 0 0 0 9 9c12 0 21-13 21-28Z" fill="#221b0b"/>
+            <path d="M15 51c4-11 11-18 21-22" fill="none" stroke="#221b0b" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+        </div>
         <h1>补镜</h1>
         <p>在剪辑时间线上，补一段能用的镜头</p>
         <small>交互 DEMO · 解析、检索与生成均为预制示例</small>
@@ -176,18 +182,17 @@ try {
 
   await setCaption(
     '①',
-    '点击 4 秒待补区间',
-    '中间有一段四秒的辅助画面还没补。点击时间线上的待补区间。',
+    '调用补镜，选中 4 秒空档',
+    '项目这里有一段四秒空档。点击时间线右上角的补镜按钮，选中这段空档。',
   )
-  await clickEl(page.locator('.timeline-gap'))
-  await wait(4200)
+  await clickEl(page.locator('.shot-entry'))
+  await wait(5200)
 
   await setCaption(
     '②',
     '需求、时长、画幅从区间带入',
     '四秒时长、十六比九画幅和连续口播，会从区间自动带入补镜面板。',
   )
-  await clickEl(page.locator('.gap-actions .btn-primary'))
   await wait(2200)
 
   await setCaption('', '使用示例需求：风吹树冠，不要人物', '输入画面需求：风吹树冠，不要人物。这里提供示例快捷入口。')
@@ -309,9 +314,7 @@ try {
     '失败可以独立演示',
     '重置后可以重新体验。失败状态通过独立演示开关触发，不在主流程随机失败。',
   )
-  await clickEl(page.locator('.timeline-gap'))
-  await wait(700)
-  await clickEl(page.locator('.gap-actions .btn-primary'))
+  await clickEl(page.locator('.shot-entry'))
   await wait(700)
   await clickEl(page.getByRole('button', { name: /填入示例/ }))
   await clickEl(page.getByRole('tab', { name: /AI 生成/ }))

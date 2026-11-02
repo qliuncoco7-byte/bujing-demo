@@ -306,7 +306,7 @@ export const SidePanel = memo(function SidePanel({
             <Icon name="close" size={17} />
           </button>
         </div>
-        <h1>{intent === 'replace' ? '替换这段画面' : '补充一段空镜'}</h1>
+        <h1>{intent === 'replace' ? '替换这段画面' : '为这段空档选画面'}</h1>
         <p className="panel-sub">
           区间 00:05–00:09 · 4.0 秒 · {PROJECT.aspect} · 口播继续
         </p>

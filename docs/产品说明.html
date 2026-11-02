@@ -679,6 +679,38 @@
         color: var(--ink);
       }
 
+      .web-toc {
+        display: none;
+      }
+
+      .personal-essay {
+        max-width: 168mm;
+        margin-top: 5mm;
+      }
+
+      .personal-essay p {
+        margin: 0 0 3.6mm;
+        color: var(--ink-2);
+        font-size: 11px;
+        line-height: 1.86;
+        letter-spacing: 0.005em;
+      }
+
+      .personal-essay p.personal-lead {
+        color: var(--ink);
+        font-size: 12.5px;
+        line-height: 1.8;
+      }
+
+      .personal-pull {
+        margin-top: 7mm;
+        padding-top: 4mm;
+        border-top: 1px solid var(--line);
+        color: var(--amber);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+
       .mono {
         font-family: var(--mono);
         font-size: 0.92em;
@@ -797,34 +829,163 @@
       }
 
       @media screen {
+        html {
+          scroll-behavior: smooth;
+        }
+
         body {
-          padding: 12mm 0;
+          padding: 0;
+          background: var(--paper);
+        }
+
+        .web-toc {
+          position: sticky;
+          top: 0;
+          z-index: 50;
+          display: flex;
+          align-items: center;
+          gap: 22px;
+          height: 48px;
+          padding: 0 28px;
+          background: rgba(250, 247, 240, 0.93);
+          border-bottom: 1px solid var(--line);
+          backdrop-filter: blur(14px);
+          overflow-x: auto;
+          white-space: nowrap;
+        }
+
+        .web-toc-brand {
+          color: var(--ink);
+          font-weight: 750;
+          letter-spacing: 0.1em;
+          margin-right: 4px;
+        }
+
+        .web-toc a {
+          color: var(--muted);
+          font-size: 11px;
+          text-decoration: none;
+          padding: 4px 0;
+          border-bottom: 1px solid transparent;
+        }
+
+        .web-toc a:hover {
+          color: var(--ink);
+          border-bottom-color: var(--amber);
         }
 
         .page {
-          box-shadow: 0 14px 50px rgba(35, 33, 29, 0.16);
-          margin-bottom: 10mm;
+          width: 100%;
+          max-width: 920px;
+          height: auto;
+          min-height: 0;
+          padding: 52px 44px 60px;
+          margin: 0 auto;
+          display: block;
+          overflow: visible;
+          border-bottom: 1px solid var(--line);
+          box-shadow: none;
+          scroll-margin-top: 48px;
+          page-break-after: auto;
+        }
+
+        .page:last-child {
+          border-bottom: 0;
+        }
+
+        .page-foot {
+          display: none;
+        }
+
+        .page h1 {
+          font-size: 46px;
+        }
+
+        .page h2 {
+          font-size: 27px;
+        }
+
+        .lead {
+          font-size: 15px;
+        }
+      }
+
+      @media screen and (max-width: 700px) {
+        .web-toc {
+          gap: 14px;
+          padding: 0 16px;
+        }
+
+        .page {
+          padding: 32px 20px 44px;
+        }
+
+        .page h1 {
+          font-size: 38px;
+        }
+
+        .page h2 {
+          font-size: 24px;
+        }
+
+        .two-col,
+        .two-col.wide-left,
+        .flow-grid,
+        .shot-grid,
+        .ai-grid,
+        .verify-grid,
+        .principle-row {
+          grid-template-columns: 1fr;
         }
       }
 
       @media print {
         body {
           background: #fff;
+          padding: 0;
+        }
+
+        .web-toc {
+          display: none !important;
         }
 
         .page {
-          box-shadow: none;
+          width: 210mm;
+          height: 297mm;
+          padding: 15mm 15mm 12mm;
           margin: 0;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+          page-break-after: always;
+          scroll-margin-top: 0;
+        }
+
+        .page:last-child {
+          page-break-after: auto;
+        }
+
+        .page-foot {
+          display: flex;
         }
       }
     </style>
   </head>
   <body>
+    <nav class="web-toc" aria-label="文档目录">
+      <span class="web-toc-brand">补镜</span>
+      <a href="#p1">产品与用户</a>
+      <a href="#p2">主流程</a>
+      <a href="#p3">判断与取舍</a>
+      <a href="#p4">本人喜欢的产品</a>
+      <a href="#p5">AI 与交付</a>
+    </nav>
+
     <!-- PAGE 1 -->
-    <section class="page">
+    <section class="page" id="p1">
       <div class="topline">
         <span><strong>补镜</strong> / 产品说明</span>
-        <span>2026.11 · 交互 Demo 内部稿</span>
+        <span>2026.11 · 交互 Demo</span>
       </div>
       <div class="rule"></div>
 
@@ -838,7 +999,7 @@
           帮助创作者在剪辑缺少辅助画面时，结合当前位置的内容需求与原片表达风格，检索已有素材或按需生成镜头，预览后补入时间线。
         </p>
         <div class="kicker-strip">
-          <span class="pill is-amber">4 秒待补区间</span>
+          <span class="pill is-amber">4 秒空档</span>
           <span class="pill is-green">素材库 / AI 生成</span>
           <span class="pill">可选原片分析</span>
           <span class="pill">上下文预览</span>
@@ -874,7 +1035,7 @@
         <img src="assets/overview.png" alt="补镜演示项目的初始界面" />
         <figcaption class="caption">
           <span><strong>预设项目「城市里的树」</strong> · 15 秒 · 16:9 · 口播完整</span>
-          <span>5–9 秒为 4.0 秒待补区间</span>
+          <span>5–9 秒为 4.0 秒空档</span>
         </figcaption>
       </figure>
 
@@ -907,7 +1068,7 @@
     </section>
 
     <!-- PAGE 2 -->
-    <section class="page">
+    <section class="page" id="p2">
       <div class="topline">
         <span><strong>补镜</strong> / 主流程</span>
         <span>从时间线进入 · 在上下文中确认</span>
@@ -927,7 +1088,7 @@
           <span class="step-num">01</span>
           <div>
             <h3>从时间线进入</h3>
-            <p>点击 4.0 秒待补区间，再点“补充空镜”。时长 4.0 秒、画幅 16:9、保留口播从区间自动带入。</p>
+            <p>在时间线调用“补镜”，选中 4.0 秒空档。需求、时长、画幅和连续口播从区间带入。</p>
           </div>
         </div>
         <div class="step">
@@ -969,9 +1130,9 @@
 
       <div class="shot-grid">
         <figure class="shot">
-          <img src="assets/gap.png" alt="选中待补区间后的界面" />
+          <img src="assets/gap.png" alt="选中空档后的界面" />
           <figcaption>
-            <strong>1 · 选中缺口</strong> · 主预览显式标出待补画面，而不是假装已有内容。
+            <strong>1 · 选中空档</strong> · 主预览显式标出空档，而不是假装已有内容。
           </figcaption>
         </figure>
         <figure class="shot">
@@ -1001,7 +1162,7 @@
     </section>
 
     <!-- PAGE 3 -->
-    <section class="page">
+    <section class="page" id="p3">
       <div class="topline">
         <span><strong>补镜</strong> / 判断与取舍</span>
         <span>为什么这样设计，哪里可能失败</span>
@@ -1133,10 +1294,10 @@
     </section>
 
     <!-- PAGE 4 -->
-    <section class="page placeholder-page">
+    <section class="page" id="p4">
       <div class="topline">
         <span><strong>补镜</strong> / 个人经历</span>
-        <span>内部待补 · 不用于提交</span>
+        <span>2026.11</span>
       </div>
       <div class="rule"></div>
 
@@ -1145,69 +1306,36 @@
         <h2>本人喜欢的产品</h2>
       </div>
 
-      <div class="draft-banner" style="margin-top: 6mm">
-        <span class="draft-badge">待补</span>
-        <div>
-          <strong>这一页必须由本人补充真实经历</strong>
-          <p>
-            不得用模板、虚构产品或编造影响代写。当前仅保留结构，PDF 为内部稿；补齐后删除本横幅与红色待补标记，再导出最终版。
-          </p>
-        </div>
+      <div class="personal-essay">
+        <p class="personal-lead">
+          说实话，我没有什么固定意义上的“最喜欢”。最近比较常用、也比较认可的是 ChatGPT 和 Codex 这一套，尤其是用 Codex 讨论方案、整理任务的过程。
+        </p>
+        <p>
+          准备笔试、面试和作业时，我一般已经有了一些想法，但还没想清楚哪些值得做、范围该收在哪里。这次笔试也是这样：我先提方向，和 Codex 来回讨论，再把确定下来的内容整理成说明，交给 Claude Code 实现。这种分工挺符合我的习惯——我更喜欢先把问题想清楚，再开始动手。
+        </p>
+        <p>
+          Codex 有个让我觉得挺舒服的设计：操作前会先说明准备做什么，完成后会给出文件位置和下一步操作。讨论几轮之后，我还能找到最终留下的东西，也知道接下来该怎么继续。过程提示和实际交付能对上，我比较容易跟上任务进度。
+        </p>
+        <p>
+          我也会拿同类工具作比较。以我的使用体验来说，Codex 的对话内容更符合我的需要；Claude Code 有时会先给出几个选项，让我更容易判断自己的偏好，这一点也挺值得借鉴。最近 ChatGPT 的聊天交互也让我觉得更顺手，所以我认可的是这套工具在讨论和操作上的整体体验。
+        </p>
+        <p>
+          不太满意的地方是，有时会卡顿、提示繁忙，回答质量偶尔也不太稳定。如果只能改一个地方，我希望先把等待和失败状态说清楚：任务到底还在继续，还是已经停了？需不需要我操作？重试时也尽量保留已有进度。等待本身可以接受，但我得知道继续等有没有意义，不然挺磨人的。
+        </p>
       </div>
 
-      <div class="prompt-form">
-        <div class="prompt-row">
-          <span class="prompt-index">01</span>
-          <div class="prompt-content">
-            <h3>产品或服务名称</h3>
-            <p>一个你实际长期使用、真正喜欢的产品。不要写补镜或本次 Demo 本身。</p>
-            <div class="blank-line short"></div>
-          </div>
-        </div>
-        <div class="prompt-row">
-          <span class="prompt-index">02</span>
-          <div class="prompt-content">
-            <h3>你喜欢它的原因</h3>
-            <p>具体到一次使用体验、一个设计取舍，或它解决了你的什么问题。</p>
-            <div class="blank-line"></div>
-            <div class="blank-line"></div>
-          </div>
-        </div>
-        <div class="prompt-row">
-          <span class="prompt-index">03</span>
-          <div class="prompt-content">
-            <h3>它对你的一点影响</h3>
-            <p>例如改变了你的工作方式、习惯，或让你对好产品有了新的判断标准。</p>
-            <div class="blank-line"></div>
-            <div class="blank-line"></div>
-          </div>
-        </div>
-        <div class="prompt-row">
-          <span class="prompt-index">04</span>
-          <div class="prompt-content">
-            <h3>你从中借鉴了什么</h3>
-            <p>可选。与补镜或其他产品判断相关的具体启发。</p>
-            <div class="blank-line"></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="note-box" style="margin-top: 8mm">
-        <strong>内部操作说明（提交前删除）</strong><br />
-        编辑 <span class="mono">docs/产品说明.html</span> 中本页的
-        <span class="mono">prompt-form</span> 区块，替换为真实内容；删除
-        <span class="mono">draft-banner</span> 与页脚“内部待补”字样，再重新导出 PDF。
-        不要保留任何空白占位或虚构信息。
+      <div class="personal-pull">
+        “等待本身可以接受，但我得知道继续等有没有意义。”
       </div>
 
       <footer class="page-foot">
-        <span class="internal">内部待补 · 需本人补充真实经历</span>
+        <span>补镜 · 产品说明</span>
         <span>4 / 5</span>
       </footer>
     </section>
 
     <!-- PAGE 5 -->
-    <section class="page">
+    <section class="page" id="p5">
       <div class="topline">
         <span><strong>补镜</strong> / AI 使用与交付</span>
         <span>模拟范围 · 验证状态 · 链接</span>
@@ -1226,12 +1354,12 @@
         <div class="ai-card">
           <h3>Codex</h3>
           <ul>
-            <li>协助梳理产品方向、核对类似功能、收敛补镜交互。</li>
+            <li>参与前期方向讨论，协助梳理产品方向、核对类似功能、收敛补镜交互。</li>
             <li>协助编写交接说明；本摘要依据交接说明记录，不扩写未发生的工作。</li>
           </ul>
         </div>
         <div class="ai-card">
-          <h3>Claude Code（CC，本会话）</h3>
+          <h3>Claude Code（本会话）</h3>
           <ul>
             <li>实现 React + Canvas 交互 Demo，制作自制程序动画与系统 TTS 口播。</li>
             <li>完成素材库/生成双路径、上下文预览、插入撤销替换、失败重试。</li>
@@ -1241,15 +1369,17 @@
         <div class="ai-card">
           <h3>用户本人</h3>
           <ul>
-            <li>决定做补镜小功能、双来源、视频类型与风格适配、轻量授权。</li>
-            <li>限制 Demo 投入与范围；第 4 页个人经历尚待本人补充。</li>
+            <li>提出并确定补镜功能方向，以及素材库与 AI 生成两条路径。</li>
+            <li>对视频类型、表现风格与氛围适配提出要求；确定轻量授权、跳过后可再次开启。</li>
+            <li>明确视频、PRD 等交付要求与细节；查看 Demo 和文档后继续提出调整、修改 PRD。</li>
+            <li>提供第 4 页真实经历，并确认演示范围的边界。</li>
           </ul>
         </div>
         <div class="ai-card">
-          <h3>记录边界</h3>
+          <h3>验证与边界</h3>
           <ul>
-            <li>未使用的工具不写入；DS 或其他工具如实际使用，请本人按真实情况补充。</li>
-            <li>不把预制示例、程序动画或系统 TTS 写成在线模型能力。</li>
+            <li>核心流程由 Playwright 在 Chrome 中逐项走通；未进行用户访谈或效果测量。</li>
+            <li>产品内不调用模型或素材 API；示例为预制程序动画与系统 TTS；不上传原片。</li>
           </ul>
         </div>
       </div>
@@ -1265,7 +1395,7 @@
         </div>
         <div class="link-row">
           <span>操作录屏</span>
-          <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4">https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4</a> · 约 2 分 07 秒</strong>
+          <strong><a href="https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4">https://qliuncoco7-byte.github.io/bujing-demo/deliverables/bujing-demo.mp4</a> · 约 2 分 06 秒</strong>
         </div>
         <div class="link-row">
           <span>说明 PDF</span>
@@ -1277,7 +1407,7 @@
         <div>
           <span class="block-label green">已核验</span>
           <ul class="check-list single">
-            <li>无登录打开预设项目，待补区间可理解</li>
+            <li>无登录打开预设项目，空档区间可理解</li>
             <li>不开启解析可继续，随后可再次开启</li>
             <li>素材库与生成路径均可操作，切换不丢需求</li>
             <li>上下文预览可播放，预览不改正式时间线</li>
@@ -1291,10 +1421,6 @@
           <p class="small-copy" style="font-size: 8.8px">
             只覆盖“风吹树冠”4 秒示例。示例画面均由本项目 Canvas 程序动画制作；“实拍观感”候选刻意模拟写实画面，并非真实拍摄，也不代表素材库授权。口播与操作录屏旁白均由 macOS 系统 TTS 生成；“AI 生成”为预制程序动画，不是在线模型输出。当前 Demo 覆盖预制的“强风改微风”一次修改和可独立触发的失败状态。
           </p>
-          <span class="block-label" style="margin-top: 3.5mm">仍待补</span>
-          <ul class="check-list single">
-            <li class="pending">第 4 页本人真实经历</li>
-          </ul>
         </div>
       </div>
 

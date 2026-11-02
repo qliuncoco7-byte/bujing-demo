@@ -37,7 +37,6 @@ export default function App() {
   const [selection, setSelection] = useState<Selection>('none')
   const [panelOpen, setPanelOpen] = useState(false)
   const [panelIntent, setPanelIntent] = useState<'add' | 'replace'>('add')
-  const [hasInteracted, setHasInteracted] = useState(false)
   const [aboutOpen, setAboutOpen] = useState(false)
   const [resetOpen, setResetOpen] = useState(false)
   const [licenseCandidate, setLicenseCandidate] = useState<Candidate | null>(null)
@@ -162,7 +161,6 @@ export default function App() {
       setPreviewPos(start)
     }
     setPlaying(true)
-    setHasInteracted(true)
   }
 
   const rewind = () => {
@@ -172,14 +170,12 @@ export default function App() {
     } else {
       setPreviewPos(0)
     }
-    setHasInteracted(true)
   }
 
   const seekTimeline = (time: number) => {
     const clamped = Math.max(0, Math.min(PROJECT.duration, time))
     setTimelinePos(clamped)
     setSelection('none')
-    setHasInteracted(true)
     if (mode.kind !== 'timeline') {
       setMode({ kind: 'timeline' })
       setPlaying(false)
@@ -197,7 +193,6 @@ export default function App() {
   }
 
   const selectGap = () => {
-    setHasInteracted(true)
     setMode({ kind: 'timeline' })
     setPlaying(false)
     pauseAudio()
@@ -206,7 +201,6 @@ export default function App() {
   }
 
   const selectInserted = () => {
-    setHasInteracted(true)
     setMode({ kind: 'timeline' })
     setPlaying(false)
     pauseAudio()
@@ -221,7 +215,6 @@ export default function App() {
   const openPanel = (intent: 'add' | 'replace') => {
     setPanelOpen(true)
     setPanelIntent(intent)
-    setHasInteracted(true)
     setMode({ kind: 'timeline' })
     setPlaying(false)
     setPreviewPos(0)
@@ -229,6 +222,8 @@ export default function App() {
     setTimelinePos(PROJECT.gapStart)
     setSelection(intent === 'add' ? 'gap' : 'inserted')
   }
+
+  const openShot = () => openPanel(timeline.inserted ? 'replace' : 'add')
 
   const closePanel = useCallback(() => {
     setPanelOpen(false)
@@ -241,7 +236,6 @@ export default function App() {
   const openAbout = useCallback(() => setAboutOpen(true), [])
 
   const previewCandidate = useCallback((candidate: Candidate) => {
-    setHasInteracted(true)
     setMode({ kind: 'candidate', candidate })
     setPreviewPos(0)
     setPlaying(true)
@@ -249,7 +243,6 @@ export default function App() {
   }, [])
 
   const previewContext = useCallback((candidate: Candidate) => {
-    setHasInteracted(true)
     setMode({ kind: 'context', candidate })
     setPreviewPos(0)
     setPlaying(true)
@@ -269,7 +262,6 @@ export default function App() {
     setPanelOpen(false)
     setPanelIntent('add')
     setPlaying(true)
-    setHasInteracted(true)
     playAudioAt(PROJECT.gapStart)
     showToast(
       replacing
@@ -298,7 +290,7 @@ export default function App() {
     showToast(
       restored
         ? `已撤销替换，恢复「${restored.shortTitle}」`
-        : '已撤销插入，恢复待补区间',
+        : '已撤销插入，恢复空档',
     )
   }
 
@@ -312,7 +304,6 @@ export default function App() {
     setSelection('none')
     setPanelOpen(false)
     setPanelIntent('add')
-    setHasInteracted(false)
     setAboutOpen(false)
     setResetOpen(false)
     setLicenseCandidate(null)
@@ -397,7 +388,7 @@ export default function App() {
             intent={panelIntent}
             onTogglePlay={togglePlay}
             onToggleMute={() => setMuted((value) => !value)}
-            onOpenPanel={() => openPanel('add')}
+            onOpenPanel={openShot}
             onExitPreview={exitPreview}
             onEnterContext={previewContext}
             onInsert={insertCandidate}
@@ -409,12 +400,12 @@ export default function App() {
             inserted={timeline.inserted}
             selection={selection}
             canUndo={timeline.history.length > 0}
-            showCoach={!hasInteracted && !panelOpen}
             onSeek={seekTimeline}
             onSelectGap={selectGap}
             onSelectInserted={selectInserted}
             onClearSelection={clearSelection}
-            onOpenPanel={() => openPanel('add')}
+            panelOpen={panelOpen}
+            onOpenPanel={openShot}
             onUndo={undoInsert}
             onReplace={() => openPanel('replace')}
           />
@@ -586,7 +577,7 @@ export default function App() {
         }
       >
         <p className="reset-copy">
-          将恢复四秒待补区间，撤销当前插入，并清空本次补镜需求、解析条件和生成记录。此操作不可撤销。
+          将恢复四秒空档，撤销当前插入，并清空本次补镜需求、解析条件和生成记录。此操作不可撤销。
         </p>
         <div className="reset-summary">
           <Icon name="info" size={14} />

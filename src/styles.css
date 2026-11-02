@@ -1087,15 +1087,6 @@ canvas {
   background: var(--amber);
 }
 
-.coach-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  color: rgba(245, 193, 90, 0.8);
-  font-size: 10px;
-  white-space: nowrap;
-}
-
 .undo-btn {
   flex: 0 0 auto;
   height: 27px;
@@ -1120,6 +1111,29 @@ canvas {
 
 .undo-btn:disabled {
   opacity: 0.32;
+}
+
+.shot-entry {
+  flex: 0 0 auto;
+  height: 27px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 9px;
+  border-radius: 7px;
+  border: 1px solid rgba(245, 193, 90, 0.26);
+  background: var(--amber-soft);
+  color: var(--amber-2);
+  font-size: 10.5px;
+  font-weight: 500;
+  transition:
+    background 0.16s ease,
+    border-color 0.16s ease;
+}
+
+.shot-entry:hover {
+  background: rgba(245, 193, 90, 0.17);
+  border-color: rgba(245, 193, 90, 0.45);
 }
 
 .timeline-grid {
@@ -1369,8 +1383,8 @@ canvas {
   justify-content: center;
   overflow: hidden;
   border-radius: 8px;
-  border: 1.4px dashed rgba(245, 193, 90, 0.5);
-  background: rgba(245, 193, 90, 0.035);
+  border: 1.4px dashed rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.018);
   transition:
     border-color 0.16s ease,
     background 0.16s ease,
@@ -1378,29 +1392,17 @@ canvas {
 }
 
 .timeline-gap:hover {
-  border-color: rgba(245, 193, 90, 0.75);
-  background: rgba(245, 193, 90, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .timeline-gap.is-selected {
   border-style: solid;
   border-color: var(--amber);
-  background: rgba(245, 193, 90, 0.1);
+  background: rgba(245, 193, 90, 0.08);
   box-shadow:
     0 0 0 1px rgba(245, 193, 90, 0.28),
-    inset 0 0 24px rgba(245, 193, 90, 0.05);
-}
-
-.gap-stripes {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: repeating-linear-gradient(
-    135deg,
-    rgba(245, 193, 90, 0.075) 0 9px,
-    transparent 9px 19px
-  );
-  opacity: 0.8;
+    inset 0 0 24px rgba(245, 193, 90, 0.04);
 }
 
 .gap-inner {
@@ -1412,18 +1414,6 @@ canvas {
   max-width: calc(100% - 16px);
 }
 
-.gap-plus {
-  width: 23px;
-  height: 23px;
-  flex: 0 0 auto;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  border: 1px dashed rgba(245, 193, 90, 0.5);
-  background: rgba(245, 193, 90, 0.08);
-  color: var(--amber);
-}
-
 .gap-copy {
   display: flex;
   flex-direction: column;
@@ -1432,17 +1422,25 @@ canvas {
 }
 
 .gap-copy strong {
-  color: var(--amber-2);
+  color: var(--muted);
   font-size: 10.5px;
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
 }
 
+.timeline-gap.is-selected .gap-copy strong {
+  color: var(--amber-2);
+}
+
 .gap-copy em {
-  color: rgba(245, 193, 90, 0.54);
+  color: var(--muted-2);
   font-size: 8.5px;
   font-style: normal;
   white-space: nowrap;
+}
+
+.timeline-gap.is-selected .gap-copy em {
+  color: rgba(245, 193, 90, 0.6);
 }
 
 .audio-track {

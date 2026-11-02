@@ -86,7 +86,7 @@ function resolveScene(
     return {
       scene: { kind: 'gap' },
       sceneTime: time - PROJECT.gapStart,
-      clipLabel: '待补画面',
+      clipLabel: '空档 · 4.0 秒',
       isGap: true,
       subtitle,
     }
@@ -300,16 +300,16 @@ export function PreviewPlayer({
               <div className="gap-card">
                 <div className="gap-kicker">
                   <span className="pulse-dot" />
-                  待补画面 · 00:05–00:09
+                  空档 · 00:05–00:09
                 </div>
-                <h2>这里还缺一段辅助画面</h2>
+                <h2>为这段空档补充画面</h2>
                 <p>
-                  口播正说到城市绿化。补一段“风吹树冠”的镜头，让前后画面接得上。
+                  口播正说到城市绿化。可以从素材库找，也可以按需生成，再看前后镜头的效果。
                 </p>
                 <div className="gap-actions">
                   <button type="button" className="btn btn-primary" onClick={onOpenPanel}>
                     <Icon name="plus" size={16} />
-                    补充空镜
+                    补镜
                   </button>
                   <button type="button" className="btn btn-glass" onClick={onTogglePlay}>
                     <Icon name="play" size={15} />
@@ -320,7 +320,6 @@ export function PreviewPlayer({
                   <span>4.0 秒</span>
                   <span>16:9</span>
                   <span>口播继续</span>
-                  <span className="gap-meta-muted">当前区间未被占用</span>
                 </div>
               </div>
             </div>

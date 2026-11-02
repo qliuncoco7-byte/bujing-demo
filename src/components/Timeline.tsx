@@ -121,7 +121,7 @@ type TimelineProps = {
   inserted: Candidate | null
   selection: Selection
   canUndo: boolean
-  showCoach: boolean
+  panelOpen: boolean
   onSeek: (time: number) => void
   onSelectGap: () => void
   onSelectInserted: () => void
@@ -137,7 +137,7 @@ export function Timeline({
   inserted,
   selection,
   canUndo,
-  showCoach,
+  panelOpen,
   onSeek,
   onSelectGap,
   onSelectInserted,
@@ -196,11 +196,11 @@ export function Timeline({
             <>
               <span className="selection-chip">
                 <span className="selection-dot" />
-                已选待补区间 00:05–00:09
+                已选空档 00:05–00:09
               </span>
               <button type="button" className="btn btn-primary btn-tiny" onClick={onOpenPanel}>
                 <Icon name="plus" size={14} />
-                补充空镜
+                补镜
               </button>
             </>
           )}
@@ -219,18 +219,23 @@ export function Timeline({
               </button>
             </>
           )}
-          {selection === 'none' && showCoach && (
-            <span className="coach-chip">
-              <span className="pulse-dot" />
-              点击虚线区间补充 4 秒画面
-            </span>
-          )}
-          {selection === 'none' && !showCoach && (
+          {selection === 'none' && (
             <span className="timeline-hint">
-              {previewing ? '预览模式 · 点击时间线返回' : '点击区间定位，拖拽标尺预览'}
+              {previewing ? '预览模式 · 点击时间线返回' : '拖拽标尺定位'}
             </span>
           )}
         </div>
+        {!panelOpen && selection === 'none' && (
+          <button
+            type="button"
+            className="shot-entry"
+            onClick={onOpenPanel}
+            title="补镜"
+          >
+            <Icon name="plus" size={14} />
+            补镜
+          </button>
+        )}
         <button
           type="button"
           className="undo-btn"
@@ -318,16 +323,12 @@ export function Timeline({
                 className={`timeline-gap ${selection === 'gap' ? 'is-selected' : ''}`}
                 style={{ left: gapLeft, width: gapWidth }}
                 onClick={onSelectGap}
-                title="待补画面 · 4.0 秒"
+                title="空档 · 4.0 秒"
               >
-                <span className="gap-stripes" aria-hidden="true" />
                 <span className="gap-inner">
-                  <span className="gap-plus">
-                    <Icon name="plus" size={15} />
-                  </span>
                   <span className="gap-copy">
-                    <strong>待补画面</strong>
-                    <em>4.0 秒 · 点击补充</em>
+                    <strong>空档</strong>
+                    <em>4.0 秒</em>
                   </span>
                 </span>
               </button>
@@ -390,7 +391,7 @@ export function Timeline({
             <div
               className="audio-gap-marker"
               style={{ left: gapLeft, width: gapWidth }}
-              title="口播在待补区间内保持连续"
+              title="口播连续"
             >
               <span>口播连续</span>
             </div>
